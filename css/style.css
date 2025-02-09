@@ -1,0 +1,104 @@
+/* HEADER */
+.navbar{
+    background-color: var(--bs-black);
+}
+.navbar-nav .nav-link,
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show{
+    color: var(--bs-white);
+    font-family: var(--primary-font);
+}
+.navbar-nav .nav-link.active{
+    color: var(--active-color);
+}
+.login-nav-link{
+    max-width: 80px;
+}
+
+/* MAIN SECTION  */
+.hero-wrapper{
+    background: url("../image/bgLayer2.png");
+    background-size: cover;
+    height: 58.75rem;
+    margin-bottom: 5rem;
+}
+.hero-title .title{
+    font-family: var(--secondary-font);
+    font-weight: 400;
+    color:var(--primary-gradient);
+    /* background: linear-gradient(to right, var(--primary-gradient), var(--secondary-gradient));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent; */
+    text-shadow: 3px 3px 0 #000;
+}
+.hero-description p{
+    font-family: var(--primary-font);
+    
+    font-weight: 400;
+   
+    color: var(--bs-white);
+}
+.hero-btns a{
+    width: 13.5rem;
+    text-align: center;
+    padding-top: 0.84375rem;
+    padding-bottom: 0.84375rem;
+}
+.book-now-btn{
+    background: var(--theme-color);
+    color: var(--bs-black);
+    border-radius: 25px 0 0 25px;
+}
+.call-us-btn{
+    border: 1px solid var(--bs-white);
+    color: var(--bs-white);
+    border-radius: 0 25px 25px 0;
+}
+
+
+/* SHOP SECTION  */
+.set-position{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.size-section-background{
+    background: rgba(0, 0, 0, 0.4);
+}
+.what-we-offer-section{
+    background: url('../image/ourWorkingProcess.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.offer-back-color{
+    background: var(--shop-offer-section);
+}
+
+
+
+/* Responsive  */
+
+
+.hero-inner.flex-column-reverse{
+    @include media-breakpoint-up(sm){
+        flex-direction: column;
+    }
+}
+
+@media only screen and (min-width: 1200px){
+    .hero-title .title{
+        font-size: 60px;
+        line-height: 60px;
+    }
+    .hero-description p{
+        font-size: 18px;
+        line-height: 22px;
+    }
+}
+@media only screen and (min-width: 1900px){
+    .hero-title .title{
+        font-size: 80px;
+        line-height: 80px;
+    }
+}
