@@ -1,87 +1,41 @@
-<!-- Created - 5th January  -->
-<!-- by Nilam Rakholiya -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/base.css">
+    <title>Home - SOS Tyres and Wheels</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-dark navbar-expand-lg">
-            <div class="container-fluid">
-                <!-- <a class="navbar-brand text-white" href="#">Navbar</a> -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase active" aria-current="page" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase" href="#">services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase" href="shop.html">Shop</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase" href="#">Contact Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link login-nav-link" href="#">
-                                <img src="./image/loginImage.png" alt="Login Image">
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <header class="navbar">
+        <div class="logo">SOS Tyres and Wheels</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
         </nav>
     </header>
-    <main class="main-wrapper">
-        <section class="hero-wrapper">
-            <div class="container h-100">
-                <div class="row align-items-center h-100 hero-inner">
-                    <div class="hero-text-wrapper col-lg-7">
-                        <div class="hero-text-inner">
-                            <div class="hero-title mb-4">
-                                <h2 class="title">SOS TYRES AND WHEELS</h2>
-                            </div>
-                            <div class="hero-description mb-4">
-                                <p>At SOS Tyres and Wheels, we specialize in providing high-quality tyres and wheels along with professional fitting, balancing, and repair services to keep you safe and comfortable on the road. Whether you’re looking for durable tyres, stylish wheels, or need quick assistance with a puncture, our team is here to help with expertise and efficiency.</p>
-                            </div>
-                            <div class="hero-btns">
-                                <div class="d-flex">
-                                    <a href="" class="book-now-btn text-uppercase">Book Now</a>
-                                    <a href="" class="call-us-btn text-uppercase">Call Us</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hero-image-wrapper col-lg-5">
-                        <div class="image-inner">
-                            <img src="./image/sosTyres.png" alt="Hero Tyre Image">
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </section>
-        <section>
-            <div class="container-fluid">
-               
-            </div>
-        </section>
-    </main>
-    <footer>
-    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="js/script.js"></script>
+
+
+    <section class="hero">
+        <div class="hero-content">
+            <img src="image/sosTyres.png" alt="SOS Tyres and Wheels Logo" class="hero-logo">
+            <h1>SOS Tyres and Wheels</h1>
+            <div class="hero-buttons">
+                <a href="#" class="btn book-now">Book Now</a>
+                <a href="tel:+1234567890" class="btn call-us">Call Us</a>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2024 SOS Tyres and Wheels. All rights reserved.</p>
+    </footer>
 </body>
 </html>

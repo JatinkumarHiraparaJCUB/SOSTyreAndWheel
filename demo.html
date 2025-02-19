@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search By Tyre</title>
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+  <div class="search-container">
+    <div class="tabs">
+      <button class="tab active">Search By Tyre</button>
+      <button class="tab">Search By Wheel</button>
+    </div>
+    <p class="note">Note: You can find these numbers on your current tyres</p>
+    <div class="form">
+      <select class="dropdown" id="width" name="width">
+        <option value="" disabled selected>Width</option>
+        <option value="165">165</option>
+        <option value="175">175</option>
+        <option value="185">185</option>
+        <!-- Add more options as needed -->
+      </select>
+      <select class="dropdown" id="profile" name="profile">
+        <option value="" disabled selected>Profile</option>
+        <option value="60">60</option>
+        <option value="70">70</option>
+        <option value="80">80</option>
+        <!-- Add more options as needed -->
+      </select>
+      <select class="dropdown" id="rim" name="rim">
+        <option value="" disabled selected>Rim</option>
+        <option value="10">R10</option>
+        <option value="12">R12</option>
+        <option value="14">R14</option>
+        <!-- Add more options as needed -->
+      </select>
+      <button class="btn" id="find-tyres">Find Tyres</button>
+    </div>
+  </div>
+</body>
+</html>
