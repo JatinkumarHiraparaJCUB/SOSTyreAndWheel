@@ -1,265 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyre Search Results - SOS Tyres and Wheels</title>
     <link rel="stylesheet" href="css/style.css"> <!-- Link to CSS file -->
-    <style>
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #222; /* Dark background */
-            color: #fff; /* White text */
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            gap: 20px;
-        }
-
-        /* Navbar styles (if you are using it from before) */
-        .navbar {
-            background-color: black;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar .logo {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .navbar nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-
-        .navbar nav ul li {
-            margin-left: 20px;
-        }
-
-        .navbar nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        /* Filter Bar Styles */
-        .filter-bar {
-            width: 250px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
-            border-radius: 10px;
-        }
-
-        .filter-bar h2 {
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-
-        .filter-bar select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(0, 0, 0, 0.3); /* Dark select background */
-            color: #fff;
-        }
-        .filter-bar select option {
-            background-color: #222;
-        }
-
-        .filter-bar button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #555;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .filter-bar button:hover {
-            background-color: #777;
-        }
-
-        /* Product Grid Container */
-        .product-grid-container {
-            flex: 1;
-        }
-
-        .header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .header-bar h2 {
-            margin: 0;
-        }
-
-        .header-bar .sort-button {
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: #555;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .header-bar .sort-button:hover {
-            background-color: #777;
-        }
-
-        /* Product Grid */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
-            gap: 20px;
-        }
-
-        .product-card {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .product-card img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
-        .product-card h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 1.2em;
-        }
-
-        .product-card p {
-            font-size: 0.9em;
-            color: #ccc;
-        }
-
-        .product-card .buy-now {
-            display: inline-block;
-            padding: 8px 15px;
-            background-color: #ffc107; /* Yellow */
-            color: #000;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-            transition: background-color 0.3s;
-        }
-
-        .product-card .buy-now:hover {
-            background-color: #ffda64;
-        }
-
-        /* Footer styles */
-        footer {
-            background-color: black;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        /*Add image styles*/
-        /*  Add to product card  */
-        .product-card {
-            position: relative;
-            overflow: hidden; /* Needed to contain the badge */
-        }
-
-        .product-card .badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #f44336; /* Red color for the badge */
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8em;
-            z-index: 1; /* Ensure badge appears above the image */
-        }
-
-        .product-card .sold-out-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 0, 0, 0.5); /* Semi-transparent red */
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2em;
-            font-weight: bold;
-            border-radius: 10px; /* Match card border radius */
-            z-index: 2; /* Above image and badge */
-        }
-        /*Quantity container styles*/
-        .quantity-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px; /* Space between items */
-            margin-top: 10px;
-        }
-
-        .quantity-label {
-            font-size: 0.9em;
-            color: #ccc;
-        }
-
-        .quantity-input {
-            width: 50px;
-            padding: 5px;
-            border: 1px solid #555;
-            border-radius: 5px;
-            background-color: rgba(0, 0, 0, 0.3);
-            color: #fff;
-            text-align: center;
-        }
-           /*Responsive CSS*/
-        @media screen and (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .filter-bar {
-                width: 80%;
-                max-width: 400px;
-            }
-
-            .product-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-        }
-    </style>
 </head>
-
 <body>
      <header class="navbar">
         <div class="logo">SOS Tyres and Wheels</div>
@@ -273,167 +19,167 @@
             </ul>
         </nav>
     </header>
+    <main>
+        <section class="container">
+            <div class="filter-bar">
+                <h2>Filter</h2>
 
-    <section class="container">
+                <select id="brand">
+                    <option value="">Tyre Brand</option>
+                    <option value="brand1">Hankook</option>
+                    <option value="brand2">Bridgestone</option>
+                    <!-- More brands -->
+                </select>
 
-        <div class="filter-bar">
-            <h2>Filter</h2>
+                <select id="model">
+                    <option value="">Tyre Model</option>
+                    <option value="model1">Model 1</option>
+                    <option value="model2">Model 2</option>
+                    <!-- More models -->
+                </select>
 
-            <select id="brand">
-                <option value="">Tyre Brand</option>
-                <option value="brand1">Hankook</option>
-                <option value="brand2">Bridgestone</option>
-                <!-- More brands -->
-            </select>
+                <select id="type">
+                    <option value="">Tyre Type</option>
+                    <option value="type1">Type 1</option>
+                    <option value="type2">Type 2</option>
+                    <!-- More types -->
+                </select>
 
-            <select id="model">
-                <option value="">Tyre Model</option>
-                <option value="model1">Model 1</option>
-                <option value="model2">Model 2</option>
-                <!-- More models -->
-            </select>
+                <select id="vehicle-type">
+                    <option value="">Vehicle Type</option>
+                    <option value="type1">Car</option>
+                    <option value="type2">Truck</option>
+                    <!-- More types -->
+                </select>
 
-            <select id="type">
-                <option value="">Tyre Type</option>
-                <option value="type1">Type 1</option>
-                <option value="type2">Type 2</option>
-                <!-- More types -->
-            </select>
-
-            <select id="vehicle-type">
-                <option value="">Vehicle Type</option>
-                <option value="type1">Car</option>
-                <option value="type2">Truck</option>
-                <!-- More types -->
-            </select>
-
-            <select id="car-make">
-                <option value="">Car Make</option>
-                <option value="make1">Toyota</option>
-                <option value="make2">Ford</option>
-                <!-- More makes -->
-            </select>
+                <select id="car-make">
+                    <option value="">Car Make</option>
+                    <option value="make1">Toyota</option>
+                    <option value="make2">Ford</option>
+                    <!-- More makes -->
+                </select>
 
 
-            <select id="speed-rating">
-                <option value="">Min Speed Rating</option>
-                <option value="H">H</option>
-                <option value="V">V</option>
-                <option value="W">W</option>
-            </select>
+                <select id="speed-rating">
+                    <option value="">Min Speed Rating</option>
+                    <option value="H">H</option>
+                    <option value="V">V</option>
+                    <option value="W">W</option>
+                </select>
 
-            <select id="run-flat">
-                <option value="">Run Flat</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
+                <select id="run-flat">
+                    <option value="">Run Flat</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
 
-            <button>Search</button>
-        </div>
-
-        <div class="product-grid-container">
-            <div class="header-bar">
-                <h2>Search Result:</h2>
-                <button class="sort-button">Sort By</button>
+                <button>Search</button>
             </div>
 
-            <div class="product-grid">
-                <div class="product-card">
-                    <span class="badge">Best Quality</span>
-                    <img src="./image/placeholder.png" alt="Hankook 205/65R16">
-                    <h3>Hankook 205/65R16</h3>
-                    <p>107/105T 8PR RA18 VANTRA LT</p>
-                     <div class="quantity-container">
-                        <label for="quantity1" class="quantity-label">Quantity:</label>
-                        <input type="number" id="quantity1" class="quantity-input" value="1" min="1">
-                    </div>
-                    <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
+            <div class="product-grid-container">
+                <div class="header-bar">
+                    <h2>Search Result:</h2>
+                    <button class="sort-button">Sort By</button>
                 </div>
 
-                <div class="product-card">
-                    <span class="badge">Premium</span>
-                    <img src="./image/placeholder.png" alt="Bridgestone 205/65R16">
-                    <h3>Bridgestone 205/65R16</h3>
-                    <p>107/105T 8PR RA18 LT</p>
-                      <div class="quantity-container">
-                        <label for="quantity2" class="quantity-label">Quantity:</label>
-                        <input type="number" id="quantity2" class="quantity-input" value="1" min="1">
+                <div class="product-grid">
+                    <div class="product-card">
+                        <span class="badge">Best Quality</span>
+                        <img src="./image/placeholder.png" alt="Hankook 205/65R16">
+                        <h3>Hankook 205/65R16</h3>
+                        <p>107/105T 8PR RA18 VANTRA LT</p>
+                        <div class="quantity-container">
+                            <label for="quantity1" class="quantity-label">Quantity:</label>
+                            <input type="number" id="quantity1" class="quantity-input" value="1" min="1">
+                        </div>
+                        <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
                     </div>
-                    <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
-                </div>
 
-                <div class="product-card">
-                    <img src="./image/placeholder.png" alt="CEAT 205/65R16">
-                    <h3>CEAT 205/65R16</h3>
-                    <p>107/105T LT</p>
-                    <div class="quantity-container">
-                        <label for="quantity3" class="quantity-label">Quantity:</label>
-                        <input type="number" id="quantity3" class="quantity-input" value="1" min="1">
+                    <div class="product-card">
+                        <span class="badge">Premium</span>
+                        <img src="./image/placeholder.png" alt="Bridgestone 205/65R16">
+                        <h3>Bridgestone 205/65R16</h3>
+                        <p>107/105T 8PR RA18 LT</p>
+                        <div class="quantity-container">
+                            <label for="quantity2" class="quantity-label">Quantity:</label>
+                            <input type="number" id="quantity2" class="quantity-input" value="1" min="1">
+                        </div>
+                        <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
                     </div>
-                    <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
-                </div>
 
-                 <div class="product-card">
-                    <div class="sold-out-overlay">Sold Out!</div>
-                    <img src="./image/placeholder.png" alt="Pirelli 205/65R16">
-                    <h3>Pirelli 205/65R16</h3>
-                    <p>107/105T 8PR RA18 LT</p>
-                     <div class="quantity-container">
-                        <label for="quantity4" class="quantity-label">Quantity:</label>
-                        <input type="number" id="quantity4" class="quantity-input" value="1" min="1">
+                    <div class="product-card">
+                        <img src="./image/placeholder.png" alt="CEAT 205/65R16">
+                        <h3>CEAT 205/65R16</h3>
+                        <p>107/105T LT</p>
+                        <div class="quantity-container">
+                            <label for="quantity3" class="quantity-label">Quantity:</label>
+                            <input type="number" id="quantity3" class="quantity-input" value="1" min="1">
+                        </div>
+                        <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
                     </div>
-                    <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
-                </div>
 
-                <div class="product-card">
-                    <span class="badge">Best Choice!</span>
-                    <img src="./image/placeholder.png" alt="Nexen 205/65R16">
-                    <h3>Nexen 205/65R16</h3>
-                    <p>107/105T 8PR RA18</p>
-                       <div class="quantity-container">
-                        <label for="quantity5" class="quantity-label">Quantity:</label>
-                        <input type="number" id="quantity5" class="quantity-input" value="1" min="1">
+                    <div class="product-card">
+                        <div class="sold-out-overlay">Sold Out!</div>
+                        <img src="./image/placeholder.png" alt="Pirelli 205/65R16">
+                        <h3>Pirelli 205/65R16</h3>
+                        <p>107/105T 8PR RA18 LT</p>
+                        <div class="quantity-container">
+                            <label for="quantity4" class="quantity-label">Quantity:</label>
+                            <input type="number" id="quantity4" class="quantity-input" value="1" min="1">
+                        </div>
+                        <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
                     </div>
-                    <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
-                </div>
 
-                <div class="product-card">
-                    <img src="./image/placeholder.png" alt="Linglong 205/65R16">
-                    <h3>Linglong 205/65R16</h3>
-                    <p>107/105T 8PR RA18 VANTRA LT</p>
-                      <div class="quantity-container">
-                        <label for="quantity6" class="quantity-label">Quantity:</label>
-                        <input type="number" id="quantity6" class="quantity-input" value="1" min="1">
+                    <div class="product-card">
+                        <span class="badge">Best Choice!</span>
+                        <img src="./image/placeholder.png" alt="Nexen 205/65R16">
+                        <h3>Nexen 205/65R16</h3>
+                        <p>107/105T 8PR RA18</p>
+                        <div class="quantity-container">
+                            <label for="quantity5" class="quantity-label">Quantity:</label>
+                            <input type="number" id="quantity5" class="quantity-input" value="1" min="1">
+                        </div>
+                        <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
                     </div>
-                    <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
-                </div>
 
-                <div class="product-card">
-                    <img src="./image/placeholder.png" alt="Hilo 205/65R16">
-                    <h3>hilo 205/65R16</h3>
-                    <p>107/105T 8PR RA18 VANTRA LT</p>
-                     <div class="quantity-container">
-                        <label for="quantity7" class="quantity-label">Quantity:</label>
-                        <input type="number" id="quantity7" class="quantity-input" value="1" min="1">
+                    <div class="product-card">
+                        <img src="./image/placeholder.png" alt="Linglong 205/65R16">
+                        <h3>Linglong 205/65R16</h3>
+                        <p>107/105T 8PR RA18 VANTRA LT</p>
+                        <div class="quantity-container">
+                            <label for="quantity6" class="quantity-label">Quantity:</label>
+                            <input type="number" id="quantity6" class="quantity-input" value="1" min="1">
+                        </div>
+                        <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
                     </div>
-                    <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
-                </div>
 
-                <div class="product-card">
-                    <img src="./image/placeholder.png" alt="Hankook 205/65R16">
-                    <h3>Hankook 205/65R16</h3>
-                    <p>107/105T 8PR RA18 VANTRA LT</p>
-                       <div class="quantity-container">
-                        <label for="quantity8" class="quantity-label">Quantity:</label>
-                        <input type="number" id="quantity8" class="quantity-input" value="1" min="1">
+                    <div class="product-card">
+                        <img src="./image/placeholder.png" alt="Hilo 205/65R16">
+                        <h3>hilo 205/65R16</h3>
+                        <p>107/105T 8PR RA18 VANTRA LT</p>
+                        <div class="quantity-container">
+                            <label for="quantity7" class="quantity-label">Quantity:</label>
+                            <input type="number" id="quantity7" class="quantity-input" value="1" min="1">
+                        </div>
+                        <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
                     </div>
-                    <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
+
+                    <div class="product-card">
+                        <img src="./image/placeholder.png" alt="Hankook 205/65R16">
+                        <h3>Hankook 205/65R16</h3>
+                        <p>107/105T 8PR RA18 VANTRA LT</p>
+                        <div class="quantity-container">
+                            <label for="quantity8" class="quantity-label">Quantity:</label>
+                            <input type="number" id="quantity8" class="quantity-input" value="1" min="1">
+                        </div>
+                        <a href="mode_of_purchase.html" class="buy-now">Buy Now</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </section>
-   <footer>
+        </section>
+    </main>
+    <footer>
         <p>© 2024 SOS Tyres and Wheels. All rights reserved.</p>
     </footer>
 </body>

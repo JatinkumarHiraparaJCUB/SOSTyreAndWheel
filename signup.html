@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - SOS Tyres and Wheels</title>
+    <title>Signup - SOS Tyres and Wheels</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -76,7 +76,7 @@
             padding: 0px;
         }
 
-        .login-container {
+        .signup-container {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -88,28 +88,34 @@
             /* Center the container */
         }
 
-        .login-box {
+        .signup-box {
             background-color: rgba(255, 255, 255, 0.9);
             /* Semi-transparent white */
             padding: 30px;
+            margin: 30px;
             border-radius: 10px;
             box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
-            text-align: center;
+            text-align: left;
             width: 400px;
             /* Fixed width */
         }
 
-        .login-box h1 {
+        .signup-box h1 {
             margin-bottom: 20px;
             color: #001f3f;
         }
 
-        .login-box input {
+        .signup-box input {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
+        }
+
+        .signup-box label {
+            width: 100%;
+            font-size: 14px;
         }
 
         .options {
@@ -129,7 +135,7 @@
             text-decoration: underline;
         }
 
-        .login-box button {
+        .signup-box button {
             width: 100%;
             padding: 10px;
             background: #000;
@@ -141,22 +147,22 @@
             margin-top: 20px;
         }
 
-        .login-box button:hover {
+        .signup-box button:hover {
             background-color: #333;
         }
 
-        .login-box p {
+        .signup-box p {
             margin-top: 20px;
             font-size: 14px;
         }
 
-        .login-box p a {
+        .signup-box p a {
             color: #001f3f;
             text-decoration: none;
             font-weight: bold;
         }
 
-        .login-box p a:hover {
+        .signup-box p a:hover {
             text-decoration: underline;
         }
 
@@ -176,13 +182,13 @@
 
         /* Responsive Design */
         @media screen and (max-width: 768px) {
-            .login-container {
+            .signup-container {
                 flex-direction: column;
-                /* Stack login box and logo on smaller screens */
+                /* Stack signup box and logo on smaller screens */
                 align-items: center;
             }
 
-            .login-box,
+            .signup-box,
             .logo-box {
                 width: 90%;
                 /* Adjust width for smaller screens */
@@ -209,34 +215,58 @@
     </header>
 
     <main>
-        <div class="login-container">
-            <div class="login-box">
-                <h1>Welcome Back!</h1>
-                <form id="loginForm" onsubmit="return validateForm()">
+        <div class="logo-box">
+            <img src="./image/sosTyres.png" alt="SOS Tyres and Wheels">
+        </div>
+        <div class="signup-container">
+            <div class="signup-box">
+                <h1>Create an Account</h1>
+                <form id="signupForm" onsubmit="return validateForm()">
+
+                    <label><b>* First Name</b></label>
+                    <input type="text" id="firstName" placeholder="First Name" required>
+
+                    <label><b>* Last Name</b></label>
+                    <input type="text" id="lastName" placeholder="Last Name" required>
+
+                    <label><b>* Email</b></label>
                     <input type="email" id="email" placeholder="Email" required>
+
+                    <label><b>* Contact Number</b></label>
+                    <input type="tel" id="contactNumber" placeholder="Contact Number" required>
+
+                    <label><b>* Postcode</b></label>
+                    <input type="postcode" id="postcode" placeholder="Postcode" required>
+
+                    <label><b>* Password</b></label>
                     <input type="password" id="password" placeholder="Password" required>
-                    <div class="options">
-                        <label><input type="checkbox"> Remember Me </label>
-                        <a href="#">Forgot Password?</a>
-                    </div>
-                    <button type="submit">Sign In</button>
+                    <button type="submit">Sign Up</button>
                 </form>
-                <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
-            </div>
-            <div class="logo-box">
-                <img src="./image/sosTyres.png" alt="SOS Tyres and Wheels">
+                <p>Already have an account? <a href="login.html">Log In</a></p>
             </div>
         </div>
+
     </main>
 
-    <footer>
+    <!-- <footer>
         <p>© 2024 SOS Tyres and Wheels. All rights reserved.</p>
-    </footer>
+    </footer> -->
 
     <script>
         function validateForm() {
+            const usernameInput = document.getElementById('firstName') + ' ' + document.getElementById('lastName');
             const emailInput = document.getElementById('email');
+            const contactNumberInput = document.getElementById('contactNumber');
+            const postcodeInput = document.getElementById('postcode');
             const passwordInput = document.getElementById('password');
+
+            // Username validation (example: alphanumeric and at least 3 characters)
+            const usernameRegex = /^[a-zA-Z0-9]{3,}$/;
+            if (!usernameRegex.test(usernameInput.value)) {
+                alert('Username must be alphanumeric and at least 3 characters long.');
+                usernameInput.focus();
+                return false;
+            }
 
             // Basic email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -246,9 +276,26 @@
                 return false;
             }
 
-            // Password validation (you can add more complex checks)
-            if (passwordInput.value.length < 6) {
-                alert('Password must be at least 6 characters long.');
+            // Contact Number validation (basic 10-digit check)
+            const contactNumberRegex = /^\d{10}$/;
+            if (!contactNumberRegex.test(contactNumberInput.value)) {
+                alert('Please enter a valid 10-digit contact number.');
+                contactNumberInput.focus();
+                return false;
+            }
+
+            // Postcode validation (only 4 characters)
+            const postcodeRegex = /^[0-9]{4}$/;
+            if (!postcodeRegex.test(postcodeInput.value)) {
+                alert('Please enter a valid 4-digit postcode.');
+                postcodeInput.focus();
+                return false;
+            }
+
+            // Password validation (at least 8 characters, one uppercase, one lowercase, one number)
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+            if (!passwordRegex.test(passwordInput.value)) {
+                alert('Password must be at least 8 characters long and include one uppercase letter, one lowercase letter, and one number.');
                 passwordInput.focus();
                 return false;
             }

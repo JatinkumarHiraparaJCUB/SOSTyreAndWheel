@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule & Payment - SOS Tyres and Wheels</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('./image/homeBackgroundImage.jpeg');
+            /* Dark background */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            /* Needed for the overlay */
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Adjust the last value (0.5) for the desired opacity */
+            z-index: -1;
+            /* Place the overlay behind the body content */
+        }
+
+        /* Header and Footer - Assuming from previous files */
+        .navbar {
+            background-color: black;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar nav ul li {
+            margin-left: 20px;
+        }
+
+        .navbar nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Main Content Styling */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .schedule-container {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 30px;
+            width: 800px;
+            max-width: 90%;
+            /* Responsive width */
+            box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .schedule-section {
+            width: 50%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .schedule-section h2 {
+            color: #ffc107;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        /* Date and Time Selection */
+        .datetime-selection label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+            color: #eee;
+        }
+
+        .datetime-selection input[type="date"],
+        .datetime-selection select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            box-sizing: border-box;
+        }
+
+        /* Price Details */
+        .price-details {
+            background-color: #ffc107;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .price-details p {
+            margin: 5px 0;
+        }
+
+        .price-details .total {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* Confirm Button */
+        .confirm-button {
+            width: 100%;
+            padding: 12px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .confirm-button:hover {
+            background-color: #333;
+        }
+
+        /*calendar*/
+        .calendar {
+            width: 300px;
+            margin: 20px auto;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .month-year {
+            font-size: 1.2em;
+        }
+
+        .calendar-body {
+            padding: 10px;
+        }
+
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            font-weight: bold;
+            opacity: 0.8;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #555;
+        }
+
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-gap: 5px;
+        }
+
+        .day {
+            padding: 8px;
+            text-align: center;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .day:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Adjustments */
+        @media screen and (max-width: 768px) {
+            .schedule-container {
+                flex-direction: column;
+                width: 95%;
+                padding: 15px;
+            }
+
+            .schedule-section {
+                width: 100%;
+                padding: 10px;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            .schedule-section h2 {
+                font-size: 1.5em;
+            }
+        }
+
+        .price-details {
+            background-color: #fff;
+            /* Light background */
+            color: #333;
+            /* Dark text */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .price-details .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .price-details .label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .price-details .value {
+            color: #777;
+        }
+
+        .price-details .total-line {
+            border-top: 2px solid #ddd;
+            padding-top: 15px;
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-details .total-label {
+            font-size: 1.2em;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .price-details .total-value {
+            font-size: 1.2em;
+            color: #27ae60;
+            /* Green color for total */
+            font-weight: bold;
+        }
+
+        .confirm-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ffc107;
+            /* Green button */
+            color: black;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .confirm-button:hover {
+            background-color: #e9b20d;
+            /* Darker green on hover */
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">SOS Tyres and Wheels</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="schedule-container">
+
+            <div class="schedule-section">
+                <h2>Schedule</h2>
+                <div class="datetime-selection">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date">
+                    <label for="time">Time:</label>
+                    <select id="time">
+                        <option value="9:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="13:00">1:00 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="schedule-section">
+                <h2>Price Details</h2>
+                <div class="price-details">
+                    <div class="price-item">
+                        <span class="label">Tyre Price:</span>
+                        <span class="value">$195.00</span>
+                    </div>
+                    <div class="price-item">
+                        <span class="label">Quantity:</span>
+                        <span class="value">1</span>
+                    </div>
+                    <div class="price-item">
+                        <span class="label">GST (10%):</span>
+                        <span class="value">$19.50</span>
+                    </div>
+                    <div class="total-line">
+                        <span class="label total-label">Total:</span>
+                        <span class="value total-value">$214.50</span>
+                    </div>
+                    <button class="confirm-button">Confirm Payment</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 SOS Tyres and Wheels. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const monthYear = document.querySelector(".month-year");
+        const daysContainer = document.querySelector(".days");
+        const prev = document.querySelector(".prev");
+        const next = document.querySelector(".next");
+
+        let today = new Date();
+        let currentMonth = today.getMonth();
+        let currentYear = today.getFullYear();
+
+        const months = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        function updateCalendar() {
+            monthYear.textContent = `${months[currentMonth]} ${currentYear}`;
+
+            let days = "";
+            let firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+            let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            for (let i = 1; i <= firstDayOfMonth; i++) {
+                days += `<div class="day empty"></div>`;
+            }
+
+            for (let i = 1; i <= daysInMonth; i++) {
+                days += `<div class="day">${i}</div>`;
+            }
+
+            daysContainer.innerHTML = days;
+        }
+
+        prev.addEventListener("click", () => {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            updateCalendar();
+        });
+
+        next.addEventListener("click", () => {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            updateCalendar();
+        });
+
+        updateCalendar();
+    </script>
+
+</body>
+
+</html>
