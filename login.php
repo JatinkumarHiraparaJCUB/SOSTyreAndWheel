@@ -1,10 +1,66 @@
+<?php
+session_start(); // Start the session for user login tracking
+
+// Database connection details (replace with your actual credentials)
+define("HOSTNAME", "127.0.0.1:3307");
+define("MYSQLUSER", "jd153574");
+define("MYSQLPASS", "Password574");
+define("MYSQLDB", "sos_tyre");
+
+// Attempt database connection
+$conn = @new mysqli(HOSTNAME, MYSQLUSER, MYSQLPASS, MYSQLDB);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'], $_POST['password'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Prepare and execute the SQL query to fetch user data
+    $sql = "SELECT id, password FROM users WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 1) {
+        $user = $result->fetch_assoc();
+        $hashed_password = $user['password']; // Fetch the hashed password from the database
+
+        // Verify the password using password_verify (assuming passwords are hashed)
+        if (password_verify($password, $hashed_password)) {
+            // Password is correct!
+
+            // Create session variables to track user login
+            $_SESSION['user_id'] = $user['id'];  // Store user ID
+            $_SESSION['logged_in'] = true;        // Mark user as logged in
+
+            header("Location: index.php"); // Redirect to the dashboard or index
+            exit();
+        } else {
+            $errorMessage = "Login failed. Invalid email or password.";
+        }
+    } else {
+        $errorMessage = "Login failed. Invalid email or password.";
+    }
+
+    $stmt->close(); // Close the prepared statement
+}
+$conn->close(); // Close the database connection
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup - SOS Tyres and Wheels</title>
+    <title>Login - SOS Tyres and Wheels</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -63,7 +119,6 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-            padding: 0;
         }
 
         /* Main Content Styling */
@@ -73,10 +128,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 0px;
+            padding: 0;
         }
 
-        .signup-container {
+        .login-container {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -88,34 +143,28 @@
             /* Center the container */
         }
 
-        .signup-box {
+        .login-box {
             background-color: rgba(255, 255, 255, 0.9);
             /* Semi-transparent white */
             padding: 30px;
-            margin: 30px;
             border-radius: 10px;
             box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
-            text-align: left;
+            text-align: center;
             width: 400px;
             /* Fixed width */
         }
 
-        .signup-box h1 {
+        .login-box h1 {
             margin-bottom: 20px;
             color: #001f3f;
         }
 
-        .signup-box input {
+        .login-box input {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
-        }
-
-        .signup-box label {
-            width: 100%;
-            font-size: 14px;
         }
 
         .options {
@@ -135,7 +184,7 @@
             text-decoration: underline;
         }
 
-        .signup-box button {
+        .login-box button {
             width: 100%;
             padding: 10px;
             background: #000;
@@ -147,22 +196,22 @@
             margin-top: 20px;
         }
 
-        .signup-box button:hover {
+        .login-box button:hover {
             background-color: #333;
         }
 
-        .signup-box p {
+        .login-box p {
             margin-top: 20px;
             font-size: 14px;
         }
 
-        .signup-box p a {
+        .login-box p a {
             color: #001f3f;
             text-decoration: none;
             font-weight: bold;
         }
 
-        .signup-box p a:hover {
+        .login-box p a:hover {
             text-decoration: underline;
         }
 
@@ -182,13 +231,13 @@
 
         /* Responsive Design */
         @media screen and (max-width: 768px) {
-            .signup-container {
+            .login-container {
                 flex-direction: column;
-                /* Stack signup box and logo on smaller screens */
+                /* Stack login box and logo on smaller screens */
                 align-items: center;
             }
 
-            .signup-box,
+            .login-box,
             .logo-box {
                 width: 90%;
                 /* Adjust width for smaller screens */
@@ -196,10 +245,27 @@
                 /* Limit the width */
             }
         }
+        /* Error message styling */
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
+    <div>
+        <!-- Error Message Display -->
+        <?php if (!empty($errorMessage)) { ?>
+            <div class="alert alert-danger"><?php echo $errorMessage; ?></div>
+        <?php } ?>
+    </div>
 
     <header class="navbar">
         <div class="logo">SOS Tyres and Wheels</div>
@@ -215,37 +281,24 @@
     </header>
 
     <main>
-        <div class="logo-box">
-            <img src="./image/sosTyres.png" alt="SOS Tyres and Wheels">
-        </div>
-        <div class="signup-container">
-            <div class="signup-box">
-                <h1>Create an Account</h1>
-                <form action="./php/action_page.php" method="post" id="signupForm" onsubmit="return validateForm()">
-
-                    <label><b>* First Name</b></label>
-                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
-
-                    <label><b>* Last Name</b></label>
-                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
-
-                    <label><b>* Email</b></label>
+        <div class="login-container">
+            <div class="login-box">
+                <h1>Welcome Back!</h1>
+                <form id="loginForm" method="post">
                     <input type="email" id="email" name="email" placeholder="Email" required>
-
-                    <label><b>* Contact Number</b></label>
-                    <input type="tel" id="contactNumber" name="contactNumber" placeholder="Contact Number" required>
-
-                    <label><b>* Postcode</b></label>
-                    <input type="postcode" id="postcode" name="postcode" placeholder="Postcode" required>
-
-                    <label><b>* Password</b></label>
                     <input type="password" id="password" name="password" placeholder="Password" required>
-                    <button type="submit">Sign Up</button>
+                    <div class="options">
+                        <label><input type="checkbox"> Remember Me </label>
+                        <a href="#">Forgot Password?</a>
+                    </div>
+                    <button type="submit">Sign In</button>
                 </form>
-                <p>Already have an account? <a href="login.php">Log In</a></p>
+                <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+            </div>
+            <div class="logo-box">
+                <img src="./image/sosTyres.png" alt="SOS Tyres and Wheels">
             </div>
         </div>
-
     </main>
 
     <footer>
