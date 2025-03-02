@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'], $_POST['passw
             $_SESSION['user_id'] = $user['id'];  // Store user ID
             $_SESSION['logged_in'] = true;        // Mark user as logged in
 
-            header("Location: index.php"); // Redirect to the dashboard or index
+            header("Location: index.html"); // Redirect to the dashboard or index
             exit();
         } else {
             $errorMessage = "Login failed. Invalid email or password.";
@@ -273,8 +273,8 @@ $conn->close(); // Close the database connection
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="#">Services</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="shop.php">Shop</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
                 <li><a href="login.php">Login</a></li>
             </ul>
         </nav>
