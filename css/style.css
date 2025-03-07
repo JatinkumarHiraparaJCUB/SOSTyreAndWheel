@@ -1,4 +1,4 @@
-*{
+* {
   box-sizing: border-box;
 }
 body {
@@ -8,9 +8,10 @@ body {
   background-color: #001f3f;
   color: #fff;
   line-height: 1.6;
-  background: url('../image/bgLayer2.png') no-repeat center center/cover;
+  background: url("../image/bgLayer2.png") no-repeat center center/cover;
   background-color: rgba(0, 31, 63, 0.4);
-  /* position: relative; */
+  background-size: cover;
+  height: 100vh;
 }
 .container {
   max-width: 1400px;
@@ -21,6 +22,58 @@ body {
   align-items: center;
   justify-content: space-between;
 }
+
+/* LOGIN DROPDOWN  */
+
+.login-dropdown.dropdown {
+  position: relative;
+  display: inline-block;
+  margin: 0 10px;
+}
+.login-dropdown.dropdown button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+.login-dropdown.dropdown svg {
+  width: 30px;
+  height: 30px;
+  fill: #fff;
+}
+.login-dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  background: white;
+  min-width: 85px;
+  border-radius: 5px;
+  padding: 10px 0;
+  right: 0;
+}
+.login-dropdown .dropdown-menu a,
+.login-dropdown .dropdown-menu form button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.dropdown-menu > a:first-child {
+  margin-bottom: 10px;
+}
+.login-dropdown .dropdown-menu a:hover,
+.login-dropdown .dropdown-menu form button:hover {
+  background: #f1f1f1;
+}
+.login-dropdown.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* HERO  */
+
 .hero-title {
   font-size: 3em;
   margin-bottom: 20px;
@@ -72,14 +125,14 @@ body {
 }
 .mode-of-purchase {
   padding: 50px 0;
-  background-image: url('your-tyre-background.jpg');
+  background-image: url("your-tyre-background.jpg");
   background-size: cover;
   background-position: center;
   position: relative;
   overflow: hidden;
 }
 .mode-of-purchase::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -142,10 +195,13 @@ body {
 } */
 .navbar {
   background-color: black;
-  padding: 15px;
+  padding: 5px 15px 5px 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 .navbar .logo {
   color: white;
@@ -157,6 +213,7 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
+  align-items: center;
 }
 .navbar nav ul li {
   margin-left: 20px;
@@ -221,8 +278,8 @@ body {
 }
 .filter-bar button {
   padding: 10px 15px;
-  background-color: black; 
-  color: yellow; 
+  background-color: black;
+  color: yellow;
   border: none;
   cursor: pointer;
   width: 100%;
@@ -255,9 +312,8 @@ footer {
   background-color: black;
   color: white;
   text-align: center;
-  padding: 1rem;
-  /* position: fixed; */
-  /* bottom: 0; */
+  position: fixed;
+  bottom: 0;
   width: 100%;
 }
 /* Australia Map and Logo (Right Side) */
@@ -275,7 +331,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  /* height: 90vh; */
   gap: 50px;
 }
 .login-box {
@@ -295,7 +351,7 @@ footer {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.options {
+.login-box .options {
   display: flex;
   justify-content: space-between;
   font-size: 14px;
@@ -366,67 +422,718 @@ button {
   border-radius: 4px;
 }
 
+/* MODAL */
+.tyre-modal.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.tyre-modal .modal-content {
+  background-color: #111;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 900px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+  display: flex;
+  color: white;
+}
+.tyre-modal .tyre-info {
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #333;
+}
+.tyre-modal .tyre-info img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+.tyre-modal .tyre-form {
+  width: 50%;
+  padding: 30px;
+  box-sizing: border-box;
+  text-align: left;
+}
+.tyre-modal .tyre-form label {
+  display: block;
+  margin-bottom: 5px;
+  color: #ddd;
+}
+.tyre-modal .tyre-form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: #444;
+  color: #fff;
+  box-sizing: border-box;
+}
+.tyre-modal .tyre-form button {
+  background-color: #ffc107;
+  color: black;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.tyre-modal .tyre-form button:hover {
+  background-color: #ffda64;
+}
+/* The Close Button */
+.tyre-modal .close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: #f1f1f1;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.tyre-modal .close-button:hover,
+.tyre-modal .close-button:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* CONTACT US  */
+.contact-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  /* overflow: hidden; */
+  display: flex;
+  width: 90%;
+  max-width: 1000px;
+  margin: 35px auto;
+}
+.contact-image {
+  width: 50%;
+  background-image: url('../image/contactUs.png');
+  background-size: cover;
+  background-position: center;
+}
+.contact-form {
+  width: 50%;
+  padding: 30px;
+  box-sizing: border-box;
+  color: #333;
+  text-align: left;
+}
+
+.contact-form h2 {
+  color: #001f3f;
+  margin-bottom: 20px;
+  font-size: 2em;
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.contact-form textarea {
+  height: 120px;
+}
+
+.contact-form button {
+  background-color: #001f3f;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+  background-color: #001529;
+  /* Darker blue on hover */
+}
+
+.contact-details {
+  width: 50%;
+  padding: 30px;
+  box-sizing: border-box;
+  color: #333;
+  text-align: left;
+}
+
+.contact-details h2 {
+  color: #001f3f;
+  margin-bottom: 20px;
+  font-size: 2em;
+}
+
+.contact-details p {
+  margin-bottom: 15px;
+  color: #666;
+  display: flex;
+  /* Use flexbox for icon alignment */
+  align-items: center;
+  /* Vertically align the icon and text */
+}
+
+.contact-details h3 {
+  color: #001f3f;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+.contact-details p i {
+  margin-right: 10px;
+  /* Adjust spacing */
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  /* Add spacing between text and icons */
+}
+
+.social-icons a {
+  font-size: 30px;
+  text-decoration: none;
+  color: #333;
+}
+/* Social Icons hover */
+.social-icons a:hover {
+  color: #2980b9;
+  transform: scale(1.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* PAYMENT  */
+.schedule-container {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 30px;
+  width: 800px;
+  max-width: 90%;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.schedule-section {
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.schedule-section h2 {
+  color: #ffc107;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: left;
+}
+/* Date and Time Selection */
+.datetime-selection label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+  color: #eee;
+}
+.datetime-selection input[type="date"],
+.datetime-selection select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  box-sizing: border-box;
+}
+/* Price Details */
+.price-details {
+  background-color: #ffc107;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+}
+.price-details p {
+  margin: 5px 0;
+}
+.price-details .total {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 15px;
+}
+/* Confirm Button */
+.confirm-button {
+  width: 100%;
+  padding: 12px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.confirm-button:hover {
+  background-color: #333;
+}
+
+/*calendar*/
+.calendar {
+  width: 300px;
+  margin: 20px auto;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+.month-year {
+  font-size: 1.2em;
+}
+.calendar-body {
+  padding: 10px;
+}
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-weight: bold;
+  opacity: 0.8;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #555;
+}
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 5px;
+}
+.day {
+  padding: 8px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.day:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.price-details {
+  background-color: #fff;
+  color: #333;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+.price-details .price-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.price-details .label {
+  font-weight: bold;
+  color: #555;
+}
+.price-details .value {
+  color: #777;
+}
+.price-details .total-line {
+  border-top: 2px solid #ddd;
+  padding-top: 15px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.price-details .total-label {
+  font-size: 1.2em;
+  color: #333;
+  font-weight: bold;
+}
+.price-details .total-value {
+  font-size: 1.2em;
+  color: #27ae60;
+  font-weight: bold;
+}
+.confirm-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+.confirm-button:hover {
+  background-color: #e9b20d;
+}
+
+/* SIGN UP  */
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 200px;
+  max-width: 1000px;
+  width: 100%;
+  /* Take up full width */
+  margin: 0 auto;
+  /* Center the container */
+}
+
+.signup-box {
+  background-color: rgba(255, 255, 255, 0.9);
+  /* Semi-transparent white */
+  padding: 30px;
+  margin: 30px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+  text-align: left;
+  width: 400px;
+  /* Fixed width */
+}
+
+.signup-box h1 {
+  margin-bottom: 20px;
+  color: #001f3f;
+}
+
+.signup-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.signup-box label {
+  width: 100%;
+  font-size: 14px;
+}
+.signup-box button {
+  width: 100%;
+  padding: 10px;
+  background: #000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.signup-box button:hover {
+  background-color: #333;
+}
+
+.signup-box p {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.signup-box p a {
+  color: #001f3f;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signup-box p a:hover {
+  text-decoration: underline;
+}
+.logo-box {
+  width: 400px;
+  text-align: center;
+}
+.logo-box img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  width: 350px;
+}
+
+
+/* LOGIN PAGE  */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 200px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+.login-box {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 400px;
+}
+.login-box h1 {
+  margin-bottom: 20px;
+  color: #001f3f;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.login-box .options {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-top: 10px;
+  /* align-items: center; */
+}
+.login-box .options a {
+  color: #001f3f;
+  text-decoration: none;
+}
+.login-box .options a:hover {
+  text-decoration: underline;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background: #000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.login-box button:hover {
+  background-color: #333;
+}
+.login-box p {
+  margin-top: 20px;
+  font-size: 14px;
+}
+.login-box p a {
+  color: #001f3f;
+  text-decoration: none;
+  font-weight: bold;
+}
+.login-box p a:hover {
+  text-decoration: underline;
+}
+.logo-box {
+  width: 400px;
+  text-align: center;
+}
+.logo-box img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  width: 350px;
+}
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  text-align: center;
+}
+
+
+
 /* Responsive Design */
 @media screen and (max-width: 768px) {
   .hero {
-      height: auto;
-      padding: 50px 0;
+    height: auto;
+    padding: 50px 0;
   }
   .hero-content {
-      position: relative;
-      top: auto;
-      left: auto;
-      transform: none;
-      width: 90%;
-      margin: 0 auto;
-      text-align: center;
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
   }
   .hero-content h1 {
-      font-size: 2.5em;
+    font-size: 2.5em;
   }
   .hero-content p {
-      font-size: 1em;
+    font-size: 1em;
   }
   .map-logo {
-      position: relative;
-      top: auto;
-      right: auto;
-      transform: none;
-      width: 80%;
-      margin: 20px auto;
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: none;
+    width: 80%;
+    margin: 20px auto;
   }
   .hero-buttons {
-      text-align: center;
+    text-align: center;
   }
   .hero-buttons a {
-      display: block;
-      margin: 10px auto;
-      width: 80%;
-      max-width: 250px;
-      text-align: center;
+    display: block;
+    margin: 10px auto;
+    width: 80%;
+    max-width: 250px;
+    text-align: center;
   }
   .container {
     flex-direction: column;
     align-items: center;
   }
   .filter-bar {
-      width: 80%;
-      max-width: 400px;
+    width: 80%;
+    max-width: 400px;
   }
   .purchase-options {
     flex-direction: column;
     align-items: center;
   }
   .purchase-option {
-      width: 80%;
-      max-width: 300px;
+    width: 80%;
+    max-width: 300px;
   }
   .mode-of-purchase h1 {
-      font-size: 2em; 
+    font-size: 2em;
   }
   .filter-bar {
     width: 100%;
     border-right: none;
     border-bottom: 1px solid #ccc;
+  }
+  .tyre-modal .modal-content {
+    flex-direction: column;
+    margin-top: 5%;
+  }
+  .tyre-modal .tyre-info,
+  .tyre-modal.tyre-form {
+    width: 100%;
+    text-align: center;
+  }
+  .schedule-container {
+    flex-direction: column;
+    width: 95%;
+    padding: 15px;
+  }
+  .schedule-section {
+      width: 100%;
+      padding: 10px;
+  }
+  .login-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .login-box,
+  .logo-box {
+      width: 90%;
+      max-width: 400px;
+  }
+  .signup-container {
+    flex-direction: column;
+    /* Stack signup box and logo on smaller screens */
+    align-items: center;
+  }
+  .signup-box,
+  .logo-box {
+      width: 90%;
+      /* Adjust width for smaller screens */
+      max-width: 400px;
+      /* Limit the width */
+  }
+
+  /* CONTACT US  */
+  
+  .contact-us-container {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+}
+  .contact-container {
+    flex-direction: column;
+  }
+  .contact-image,
+  .contact-form,
+  .contact-details {
+      width: 100%;
+      text-align: center;
+      /* center the contact text */
+  }
+
+  .contact-form h2 {
+      text-align: center;
+      /* center the contact text */
+  }
+
+  /*Remove the bottom spacing in small screens.*/
+  .contact-details {
+      padding: 20px;
+      /*Reduce the padding in smaller screens.*/
+  }
+
+  .social-icons {
+      justify-content: center;
+      /*Center the icons in small screens*/
+  }
+
+  .contact-details h3 {
+      text-align: center;
+      /* center the address title */
+      font-size: 1.2em;
+      /* Decrease address title size */
+  }
+
+  .contact-details p {
+      justify-content: center;
+      /* center the address content */
+  }
+
+
+}
+@media screen and (max-width: 500px) {
+  .schedule-section h2 {
+      font-size: 1.5em;
   }
 }

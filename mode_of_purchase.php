@@ -7,38 +7,26 @@
     <title>Mode of Purchase - SOS Tyres and Wheels</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-    <header class="navbar">
-        <div class="logo">SOS Tyres and Wheels</div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="shop.php">Shop</a></li>
-                <li><a href="contactus.html">Contact Us</a></li>
-                <li><a href="login.php">Login</a></li>
-            </ul>
-        </nav>
-    </header>
+    <?php include "header.php"; ?>
     <main>
         <section class="mode-of-purchase">
             <div class="container">
                 <h1>MODE OF PURCHASE</h1>
                 <div class="purchase-options">
-                    <a href="payment.html">
+                    <a href="payment.php">
                         <div class="purchase-option">
                             <img src="./image/store_fitting.png" alt="Store Fitting">
                             <p>STORE FITTING</p>
                         </div>
                     </a>
-                    <a href="payment.html">
+                    <a href="payment.php">
                         <div class="purchase-option">
                             <img src="./image/pick_up.png" alt="Pick Up">
                             <p>PICK UP</p>
                         </div>
                     </a>
-                    <a href="payment.html">
+                    <a href="payment.php">
                         <div class="purchase-option">
                             <img src="./image/mobile_fitting.png" alt="Mobile Fitting">
                             <p>MOBILE FITTING</p>
@@ -48,9 +36,8 @@
             </div>
         </section>
     </main>
-    <footer>
-        <p>© 2024 SOS Tyres and Wheels. All rights reserved.</p>
-    </footer>
+   
+    <?php include "footer.php"; ?>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 define('HOSTNAME', '127.0.0.1:3307');
 define('USERNAME', 'jd153574');
 define('PASSWORD', 'Password574');
@@ -24,14 +25,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Invalid request!";
 }
 
+if($width=='' || $rim=='' || $profile=='') {
+    $sql = "SELECT * FROM tyres";
+} else {
+    
+    $sql = "SELECT * FROM tyres WHERE width = $width AND `profile` = $profile AND rim = $rim";
+}
+
 // Retrieve search query from the URL
-$sql = "SELECT * FROM tyres WHERE width = $width AND `profile` = $profile AND rim = $rim";
 $result = $conn->query($sql);
 
 // Close the database connection
 $conn->close();
-
-
 ?>
 
 
@@ -184,7 +189,8 @@ $conn->close();
 
         .product-grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
+            grid-template-columns: auto auto auto auto;
             gap: 20px;
             padding: 20px;
             background-color: transparent;
@@ -206,7 +212,7 @@ $conn->close();
             width: 100%;
             height: 200px;
             /* Fixed height for consistent image display */
-            object-fit: cover;
+            /* object-fit: fit; */
             border-bottom: 1px solid #eee;
         }
 
@@ -273,18 +279,7 @@ $conn->close();
 </head>
 
 <body>
-    <header class="navbar">
-        <div class="logo">SOS Tyres and Wheels</div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="shop.php">Shop</a></li>
-                <li><a href="contactus.html">Contact Us</a></li>
-                <li><a href="login.php">Login</a></li>
-            </ul>
-        </nav>
-    </header>
+<?php include "header.php"; ?>
     <main>
         <section class="container">
             <!-- <div class="filter-bar">
@@ -354,7 +349,7 @@ $conn->close();
                                     $<?= htmlspecialchars(number_format($data['price'], 2)) ?>
                                     <i class="fa fa-shopping-cart"></i>
                                 </div>
-                                <a href="#" class="view-details">View Details</a>
+                                <a href="mode_of_purchase.php" class="view-details">View Details</a>
                             </div>
                         </div>
                 <?php
@@ -367,9 +362,8 @@ $conn->close();
 
         </section>
     </main>
-    <footer>
-        <p>© 2024 SOS Tyres and Wheels. All rights reserved.</p>
-    </footer>
+   
+    <?php include "footer.php"; ?>
 </body>
 
 </html>
