@@ -1,16 +1,6 @@
 <?php
-session_start();
 
-define('HOSTNAME', '127.0.0.1:3307');
-define('MYSQLUSER', 'jd153574');
-define('MYSQLPASS', 'Password574');
-define('MYSQLDB', 'sos_tyre');
-
-$conn = @new mysqli(HOSTNAME, MYSQLUSER, MYSQLPASS, MYSQLDB);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'connection_db.php';
 
 $sql = "SELECT * FROM tyre_sizes";
 $result = $conn->query($sql);
@@ -40,7 +30,6 @@ if ($result->num_rows > 0) {
     echo "<h1>NO DATA FOUND... </h1>";
 }
 
-session_destroy();
 ?>
 
 <!DOCTYPE html>
@@ -122,10 +111,6 @@ session_destroy();
 
 </html>
 
-<style>
-
-</style>
-
 <script>
     // JavaScript to open and close the modal
     document.addEventListener('DOMContentLoaded', function() {
@@ -155,18 +140,4 @@ session_destroy();
         });
     });
 
-    function handleSearch(event) {
-        event.preventDefault(); // Prevent the default form submission
-
-        const width = document.getElementById('width').value;
-        const profile = document.getElementById('profile').value;
-        const rim = document.getElementById('rim').value;
-
-        // Construct the URL with the selected values
-        const url = `productlist.php`;
-        // `?width=${encodeURIComponent(width)}&profile=${encodeURIComponent(profile)}&rim=${encodeURIComponent(rim)}`;
-
-        // Navigate to the new URL
-        window.location.href = url;
-    }
 </script>

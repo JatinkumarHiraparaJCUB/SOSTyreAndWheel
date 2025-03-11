@@ -1,17 +1,5 @@
 <?php
-session_start();
 
-define('HOSTNAME', '127.0.0.1:3307');
-define('USERNAME', 'jd153574');
-define('PASSWORD', 'Password574');
-define('DATABASE', 'sos_tyre');
-
-// Create connection
-$conn = new mysqli(HOSTNAME, USERNAME, PASSWORD, DATABASE);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_POST)) {
         // Get values from POST request
@@ -25,13 +13,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Invalid request!";
 }
 
+
 if($width=='' || $rim=='' || $profile=='') {
     $sql = "SELECT * FROM tyres";
 } else {
-    
     $sql = "SELECT * FROM tyres WHERE width = $width AND `profile` = $profile AND rim = $rim";
 }
 
+
+include 'connection_db.php';
 // Retrieve search query from the URL
 $result = $conn->query($sql);
 

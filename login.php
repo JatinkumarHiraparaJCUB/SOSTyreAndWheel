@@ -1,61 +1,22 @@
 <?php
-session_start(); // Start the session for user login tracking
-
-// Database connection details (replace with your actual credentials)
-define("HOSTNAME", "127.0.0.1:3307");
-define("MYSQLUSER", "jd153574");
-define("MYSQLPASS", "Password574");
-define("MYSQLDB", "sos_tyre");
-
-// Attempt database connection
-$conn = @new mysqli(HOSTNAME, MYSQLUSER, MYSQLPASS, MYSQLDB);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'], $_POST['password'])) {
+    include('authentication.php'); // Include the authentication function
+
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Prepare and execute the SQL query to fetch user data
-    $sql = "SELECT id, password FROM users WHERE email = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    if (checkPassword($email, $password)) { // The actual function is in "authentication.php"
+        // Set the session variable to indicate the user is logged in
 
-    if ($result->num_rows == 1) {
-        $user = $result->fetch_assoc();
-        $hashed_password = $user['password']; // Fetch the hashed password from the database
-
-        // Verify the password using password_verify (assuming passwords are hashed)
-        if (password_verify($password, $hashed_password)) {
-            // Password is correct!
-
-            // Create session variables to track user login
-            $_SESSION['user_id'] = $user['id'];  // Store user ID
-            $_SESSION['logged_in'] = true;        // Mark user as logged in
-
-            header("Location: index.php"); // Redirect to the dashboard or index
-            exit();
-        } else {
-            $errorMessage = "Login failed. Invalid email or password.";
-        }
+        header("Location: index.php"); // Redirect after login
+        exit(); // Ensure that the script stops executing after the redirect
     } else {
         $errorMessage = "Login failed. Invalid email or password.";
     }
-
-    $stmt->close(); // Close the prepared statement
 }
 
-$conn->close(); // Close the database connection
-session_destroy(); // Clean
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,8 +31,8 @@ session_destroy(); // Clean
 <body>
     <div>
         <!-- Error Message Display -->
-        <?php if (!empty($errorMessage)) { ?>
-            <div class="alert alert-danger"><?php echo $errorMessage; ?></div>
+        <?php if (isset($errorMessage)) { ?>
+            <div class="alert alert-danger"><?php echo htmlspecialchars($errorMessage); ?></div>
         <?php } ?>
     </div>
     <?php include 'header.php'; ?>

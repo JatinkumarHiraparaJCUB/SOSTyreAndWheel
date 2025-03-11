@@ -65,7 +65,7 @@
                         <span class="label total-label">Total:</span>
                         <span class="value total-value">$214.50</span>
                     </div>
-                    <button class="confirm-button">Confirm Payment</button>
+                    <button class="confirm-button" onclick="window.location.href='payment_done_page.php'">Confirm Payment</button>
                 </div>
             </div>
 
@@ -126,6 +126,7 @@
         });
 
         updateCalendar();
+        
     </script>
 
 </body>

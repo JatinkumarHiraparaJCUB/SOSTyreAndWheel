@@ -1,17 +1,17 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
   background-color: #001f3f;
   color: #fff;
   line-height: 1.6;
   background: url("../image/bgLayer2.png") no-repeat center center/cover;
   background-color: rgba(0, 31, 63, 0.4);
   background-size: cover;
-  height: 100vh;
+  /* height: 100vh; */
 }
 .container {
   max-width: 1400px;
@@ -125,7 +125,6 @@ body {
 }
 .mode-of-purchase {
   padding: 50px 0;
-  background-image: url("your-tyre-background.jpg");
   background-size: cover;
   background-position: center;
   position: relative;
@@ -169,7 +168,7 @@ body {
 }
 .purchase-option img {
   width: 100%;
-  height: 80%;
+  height: 100%;
   display: block;
 }
 .purchase-option p {
@@ -521,7 +520,7 @@ button {
 }
 .contact-image {
   width: 50%;
-  background-image: url('../image/contactUs.png');
+  background-image: url("../image/contactUs.png");
   background-size: cover;
   background-position: center;
 }
@@ -689,21 +688,6 @@ button {
   font-weight: bold;
   margin-top: 15px;
 }
-/* Confirm Button */
-.confirm-button {
-  width: 100%;
-  padding: 12px;
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-.confirm-button:hover {
-  background-color: #333;
-}
 
 /*calendar*/
 .calendar {
@@ -789,7 +773,7 @@ button {
   font-weight: bold;
 }
 .confirm-button {
-  width: 100%;
+  width: auto;
   padding: 12px;
   background-color: #ffc107;
   color: black;
@@ -798,7 +782,8 @@ button {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-top: 20px;
+  display: block;
+  margin: 0 auto;
 }
 .confirm-button:hover {
   background-color: #e9b20d;
@@ -884,7 +869,6 @@ button {
   border-radius: 10px;
   width: 350px;
 }
-
 
 /* LOGIN PAGE  */
 .login-container {
@@ -976,7 +960,112 @@ button {
   text-align: center;
 }
 
+/* SERVICES PAGE */
+.rectangular-service-card {
+  grid-column: 1 / -1;
+  /* Span across all columns */
+  display: flex;
+  align-items: center;
+  background-color: #ffc107;
+  /* Yellow background */
+  color: #333;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  /* Adjust the padding for small screens */
+  margin: 50px 10px;
+}
 
+.rectangular-service-info {
+  flex: 1;
+  text-align: left;
+}
+
+.rectangular-service-info h3 {
+  margin-top: 0;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.rectangular-service-info p {
+  font-size: 1em;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.rectangular-service-info a {
+  display: inline-block;
+  padding: 8px 15px;
+  border: 1px solid #333;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.rectangular-service-info a:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* SERVICES DETAIL PAGE */
+.service-content {
+  padding: 2% 7%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  margin-bottom: 50px;
+  color: #eee;
+  text-align: justify;
+  position: relative;
+}
+
+.service-content h1 {
+  font-size: 2.5em;
+  color: #ffc107;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.service-content h3 {
+  font-size: 1.5em;
+  color: #ffc107;
+  font-weight: 100;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.service-content p {
+  font-size: 1.1em;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.service-content img {
+  max-width: 40%;
+  height: auto;
+  border-radius: 8px;
+  margin: 30px auto;
+  display: block;
+}
+
+.book-appointment-button {
+  background-color: #ffc107;
+  color: #333;
+  padding: 12px 25px;
+  margin-top: 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.book-appointment-button:hover {
+  background-color: #ffda64;
+  color: #222;
+}
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
@@ -1056,8 +1145,8 @@ button {
     padding: 15px;
   }
   .schedule-section {
-      width: 100%;
-      padding: 10px;
+    width: 100%;
+    padding: 10px;
   }
   .login-container {
     flex-direction: column;
@@ -1065,8 +1154,8 @@ button {
   }
   .login-box,
   .logo-box {
-      width: 90%;
-      max-width: 400px;
+    width: 90%;
+    max-width: 400px;
   }
   .signup-container {
     flex-direction: column;
@@ -1075,14 +1164,14 @@ button {
   }
   .signup-box,
   .logo-box {
-      width: 90%;
-      /* Adjust width for smaller screens */
-      max-width: 400px;
-      /* Limit the width */
+    width: 90%;
+    /* Adjust width for smaller screens */
+    max-width: 400px;
+    /* Limit the width */
   }
 
   /* CONTACT US  */
-  
+
   .contact-us-container {
     position: absolute;
     width: 100%;
@@ -1090,50 +1179,82 @@ button {
     left: 50%;
     transform: translate(-50%, -50%);
     height: 100%;
-}
+  }
   .contact-container {
     flex-direction: column;
   }
   .contact-image,
   .contact-form,
   .contact-details {
-      width: 100%;
-      text-align: center;
-      /* center the contact text */
+    width: 100%;
+    text-align: center;
+    /* center the contact text */
   }
 
   .contact-form h2 {
-      text-align: center;
-      /* center the contact text */
+    text-align: center;
+    /* center the contact text */
   }
 
   /*Remove the bottom spacing in small screens.*/
   .contact-details {
-      padding: 20px;
-      /*Reduce the padding in smaller screens.*/
+    padding: 20px;
+    /*Reduce the padding in smaller screens.*/
   }
 
   .social-icons {
-      justify-content: center;
-      /*Center the icons in small screens*/
+    justify-content: center;
+    /*Center the icons in small screens*/
   }
 
   .contact-details h3 {
-      text-align: center;
-      /* center the address title */
-      font-size: 1.2em;
-      /* Decrease address title size */
+    text-align: center;
+    /* center the address title */
+    font-size: 1.2em;
+    /* Decrease address title size */
   }
 
   .contact-details p {
-      justify-content: center;
-      /* center the address content */
+    justify-content: center;
+    /* center the address content */
+  }
+  .services-container {
+    max-width: 100%;
+    padding: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* Adjust minmax width */
   }
 
+  .rectangular-service-card {
+    flex-direction: column;
+    /* Stack info and image on smaller screens */
+    text-align: center;
+    align-items: center;
+    /* Center items horizontally */
+  }
 
+  .rectangular-service-card img {
+    width: 80%;
+    /* Make image smaller */
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  /* SERVICES DETAIL PAGE */
+  .service-content {
+    padding: 20px;
+  }
+
+  .service-content h1 {
+    font-size: 2em;
+  }
+
+  .service-content p {
+    font-size: 1em;
+  }
 }
 @media screen and (max-width: 500px) {
   .schedule-section h2 {
-      font-size: 1.5em;
+    font-size: 1.5em;
   }
 }
