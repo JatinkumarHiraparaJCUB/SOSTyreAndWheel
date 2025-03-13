@@ -17,7 +17,7 @@
         <div class="signup-container">
             <div class="signup-box">
                 <h1>Create an Account</h1>
-                <form action="./php/action_page.php" method="post" id="signupForm" onsubmit="return validateForm()">
+                <form action="./php/signup_action_page.php" method="post" id="signupForm" onsubmit="return validateForm()">
 
                     <label><b>* First Name</b></label>
                     <input type="text" id="firstName" name="firstName" placeholder="First Name" required>

@@ -58,10 +58,13 @@ if ($result->num_rows > 0) {
                     <img src="./image/wheels.png" alt="Wheels">
                     <div class="service-item-title">WHEELS</div>
                 </div>
-                <div class="service-item">
-                    <img src="./image/services.png" alt="Services">
-                    <div class="service-item-title">SERVICES</div>
-                </div>
+                <a href="services.php">
+
+                    <div class="service-item">
+                        <img src="./image/services.png" alt="Services">
+                        <div class="service-item-title">SERVICES</div>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -139,5 +142,4 @@ if ($result->num_rows > 0) {
             }
         });
     });
-
 </script>

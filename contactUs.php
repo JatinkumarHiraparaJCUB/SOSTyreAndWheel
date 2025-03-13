@@ -1,5 +1,4 @@
-
-<!DOCTYPE html>     
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,8 +10,9 @@
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
-   <?php include "header.php"; ?>
+    <?php include "header.php"; ?>
     <main>
         <div class="contact-us-container">
             <div class="contact-container">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="contact-form">
                     <h2>Contact Us</h2>
-                    <form id="contactForm" action="#" method="post">
+                    <form id="contactForm" action="./php/inquiry_action_page.php" method="post">
                         <label for="fullName">Full Name:</label>
                         <input type="text" id="fullName" name="fullName" required>
 
@@ -43,9 +43,9 @@
 
                     <h3>Follow Us:</h3>
                     <div class="social-icons">
-                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
-                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-google"></i></a>
+                        <a href="https://www.instagram.com/sostyreswheels/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/sostyressalesgoldcoast/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                        <a href="https://maps.app.goo.gl/VUfHvs1V67rLmDBE7" target="_blank" rel="noopener noreferrer"><i class="fab fa-google"></i></a>
                     </div>
                 </div>
             </div>
@@ -53,4 +53,5 @@
     </main>
     <?php include 'footer.php' ?>
 </body>
+
 </html>

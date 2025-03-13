@@ -18,7 +18,7 @@
                     <p>At SOS Tyres and Wheels, we specialize in providing high-quality tyres and wheels along with professional fitting, balancing, and repair services to keep you safe and comfortable on the road. Whether you're looking for durable tyres, stylish wheels, or need quick assistance with a puncture, our team is here to help with expertise and efficiency.</p>
                     <div class="hero-buttons">
                         <a href="shop.php" class="btn book-now">Book Now</a>
-                        <a href="tel:+1234567890" class="btn call-us">Call Us</a>
+                        <a href="tel:+61403237317" class="btn call-us">Call Us</a>
                     </div>
                 </div>
 

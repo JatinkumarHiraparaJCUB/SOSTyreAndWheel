@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Mar 03, 2025 at 03:08 AM
+-- Generation Time: Mar 13, 2025 at 11:53 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `sos_tyre`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inquiry`
+--
+
+CREATE TABLE `inquiry` (
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `message` varchar(1000) NOT NULL,
+  `id` int(144) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `inquiry`
+--
+
+INSERT INTO `inquiry` (`name`, `email`, `message`, `id`) VALUES
+('', 'yogisha@gmail.com', 'Hello Team, I want 4 tyres.', 1);
 
 -- --------------------------------------------------------
 
@@ -913,6 +933,12 @@ INSERT INTO `users` (`name`, `email`, `contact`, `password`, `postcode`, `id`) V
 --
 
 --
+-- Indexes for table `inquiry`
+--
+ALTER TABLE `inquiry`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tyres`
 --
 ALTER TABLE `tyres`
@@ -933,6 +959,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `inquiry`
+--
+ALTER TABLE `inquiry`
+  MODIFY `id` int(144) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tyre_sizes`

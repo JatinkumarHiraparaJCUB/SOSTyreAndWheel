@@ -1,3 +1,46 @@
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $product_id = isset($_POST['product_id']) ? $_POST['product_id'] : '';
+    $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : '';
+    $services_type = isset($_POST['services_type']) ? $_POST['services_type'] : '';
+    echo "Selected Quantity: " . $services_type;
+}
+
+
+if (isset($_GET['product_id'], $_GET['services_type'], $_GET['quantity'])) {
+    $product_id = htmlspecialchars($_GET['product_id']);
+    $service_type = htmlspecialchars($_GET['services_type']);
+    $quantity = htmlspecialchars($_GET['quantity']);
+
+    echo "Selected Product ID: " . $product_id . "<br>";
+    echo "Selected Service Type: " . $service_type . "<br>";
+} else {
+    echo "Invalid selection!";
+}
+
+
+include 'connection_db.php';
+
+$sql = "SELECT * FROM tyres WHERE tyre_id = '$product_id'";
+
+// Retrieve search query from the URL
+$result = $conn->query($sql);
+
+
+if ($result->num_rows > 0) {
+    while ($data = $result->fetch_assoc()) {
+
+        $product_detail = $data;
+    }
+} else {
+    echo "<p>No data found.</p>";
+}
+// Close the database connection
+$conn->close();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +65,6 @@
 </head>
 
 <body>
-
     <?php include "header.php"; ?>
     <main>
         <div class="schedule-container">
@@ -51,11 +93,11 @@
                 <div class="price-details">
                     <div class="price-item">
                         <span class="label">Tyre Price:</span>
-                        <span class="value">$195.00</span>
+                        <span class="value">$ <?= $product_detail['price'] ?></span>
                     </div>
                     <div class="price-item">
                         <span class="label">Quantity:</span>
-                        <span class="value">1</span>
+                        <span class="value">$ <?= $quantity ?></span>
                     </div>
                     <div class="price-item">
                         <span class="label">GST (10%):</span>
@@ -72,7 +114,7 @@
         </div>
     </main>
 
-   
+
     <?php include "footer.php"; ?>
     <script>
         const monthYear = document.querySelector(".month-year");
@@ -126,7 +168,6 @@
         });
 
         updateCalendar();
-        
     </script>
 
 </body>
