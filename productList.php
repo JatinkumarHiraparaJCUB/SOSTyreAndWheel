@@ -312,59 +312,50 @@ $conn->close();
 
 
             <div class="product-grid-container">
-                <!-- <select id="model">
-                    <option value="">Tyre Model</option>
-                    <?php foreach ($models as $model) {
-                        echo '<option value="model1">' . htmlspecialchars($model) . '</option>';
-                    }
-                    ?>
-                </select> -->
-                <?php
-                // Check if there's any data to display
-                foreach ($products as $data) {
-                    $productId = $data['tyre_id'];
+
+                <?php if (count($products) > 0): ?>
+                  <!-- <select id="model">
+                <option value="">Tyre Model</option>
+                <?php foreach ($models as $model) {
+                    echo '<option value="model1">' . htmlspecialchars($model) . '</option>';
+                }
                 ?>
-                    <div class="product-card">
-                        <img src="./image/tyre.png" alt="<?= htmlspecialchars($data['title']) ?>" class="product-image">
-                        <div class="product-info">
-                            <h3 class='product-title'><?= htmlspecialchars($data['title']) ?></h3>
-                            <p class="product-model"><?= htmlspecialchars($data['model']) ?></p>
-                            <div class="price-box">
-                                Pickup Price <br>
-                                $<?= htmlspecialchars(number_format($data['price'], 2)) ?>
-                                <i class="fa fa-shopping-cart"></i>
+            </select> -->
+                    <?php foreach ($products as $product): ?>
+
+                       
+                        <div class="product-card">
+                                <img src="./image/tyre.png" alt="<?= htmlspecialchars($product['title']) ?>" class="product-image">
+                                <div class="product-info">
+                                    <h3 class='product-title'><?= htmlspecialchars($product['title']) ?></h3>
+                                    <p class="product-model"><?= htmlspecialchars($product['model']) ?></p>
+                                    <div class="price-box">
+                                        Pickup Price <br>
+                                        $<?= htmlspecialchars(number_format($product['price'], 2)) ?>
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </div>
+                                 <!-- Hidden inputs and a Submit Button (Styled like a Link) -->
+
+                                <form method="post" action="mode_of_purchase.php">
+                                 
+                                    <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['tyre_id']) ?>">
+                                       <label for="quantity">Select Quantity:</label>
+                                        <select name="quantity" id="quantity" class="form-select">
+                                            <?php for ($i = 1; $i <= 10; $i++) {
+                                                echo "<option value='$i'>$i</option>";
+                                            } ?>
+                                        </select>
+                                      <button type="submit" class="buy-now">Buy Now</button>
+                                </form>
+
+                                </div>
                             </div>
 
-                            <label for="quantity">Select Quantity:</label>
-                            <form method="post" action="mode_of_purchase.php">
-                                <select name="quantity" id="quantity">
-                                    <?php for ($i = 1; $i <= 10; $i++) : ?>
-                                        <option value="<?= $i ?>"><?= $i ?></option>
-                                    <?php endfor; ?>
-                                </select>
-                                <input type="hidden" id="product_id" name="product_id" value=<?= htmlspecialchars($data['tyre_id']) ?>>
+                    <?php endforeach; ?>
 
-                                <button type="submit" name="mode_of_purchase" value="486" class="single_add_to_cart_button button alt"
-                                    style="background-color:black; color: white">Add to cart</button>
-                            </form>
-
-                        </div>
-                    </div>
-                    <script>
-                        document.getElementById("viewDetails").addEventListener("click", function(event) {
-                            event.preventDefault(); // Prevent default navigation
-
-                            let quantity = document.getElementById("quantity").value; // Get selected quantity
-                            let baseUrl = this.href; // Get the existing href value
-
-                            // Redirect with quantity parameter
-                            window.location.href = baseUrl + "&quantity=" + encodeURIComponent(quantity);
-                        });
-                    </script>
-                <?php
-                }
-
-                ?>
+                <?php else: ?>
+                    <p>No data found.</p>
+                <?php endif; ?>
             </div>
 
         </section>

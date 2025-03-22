@@ -25,3 +25,4 @@ function checkPassword($email, $password) {
     $conn->close();
     return false;
 }
+?>
