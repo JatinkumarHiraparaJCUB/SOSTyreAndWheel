@@ -34,7 +34,7 @@
                 Click <span style="color: #ffc107;">"Book an Appointment"</span> now and keep your ride running smoothly!<br />
                 </p>
 
-                <a href="#" class="book-appointment-button">Book Appointment Now</a>
+                <a href="book_appointment.php" class="book-appointment-button">Book Appointment Now</a>
             </div>
         </section>
     </main>

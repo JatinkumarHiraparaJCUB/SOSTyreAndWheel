@@ -30,7 +30,7 @@
                 <p>Areas within the central ¾ of a tyre (shown in green) which have a tread depth of no less than 1.6mm are minor repair areas.</p>
                 <p>If you suspect you have a punctured tyre, simply contact us at your earliest convenience and we will have one of our mobile tyre specialists sent to your destination to perform a full tyre assessment, repair and/or a replacement on-site and in an instant!</p>
 
-                <a href="#" class="book-appointment-button">Book Appointment Now</a>
+                <a href="book_appointment.php" class="book-appointment-button">Book Appointment Now</a>
             </div>
         </section>
     </main>

@@ -11,10 +11,11 @@
 <body>
     <?php include 'header.php'?>
     <main>
-        <div class="logo-box">
-            <img src="./image/sosTyres.png" alt="SOS Tyres and Wheels">
-        </div>
+       
         <div class="signup-container">
+            <div class="logo-box">
+                <img src="./image/sosTyres.png" alt="SOS Tyres and Wheels">
+            </div>
             <div class="signup-box">
                 <h1>Create an Account</h1>
                 <form action="./php/signup_action_page.php" method="post" id="signupForm" onsubmit="return validateForm()">
@@ -38,7 +39,7 @@
                     <input type="password" id="password" name="password" placeholder="Password" required>
                     <button type="submit">Sign Up</button>
                 </form>
-                <p>Already have an account? <a href="login.php">Log In</a></p>
+                <label>Already have an account? <a href="login.php">Log In</a></label>
             </div>
         </div>
     </main>

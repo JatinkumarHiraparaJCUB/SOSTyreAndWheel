@@ -2,10 +2,15 @@
 session_start(); // Start session BEFORE any output!
 ?>
 
-<header class="navbar">
+<header class="navbar navbar-wrap">
     <div class="logo">SOS Tyres and Wheels</div>
-    <nav>
-        <ul>
+    <nav class="main-nav-wrap">
+        <div class="hamburger-wrap">
+            <button class="hamburger-inner" onclick="toggleMenu()">
+                <span><svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none"><g clip-path="url(#clip0_429_11066)"><path d="M3 6.00092H21M3 12.0009H21M3 18.0009H21" stroke="#292929" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g><defs><clipPath id="clip0_429_11066"><rect width="24" height="24" fill="white" transform="translate(0 0.000915527)"/></clipPath></defs></svg></span>   
+            </button>
+        </div>
+        <ul class="navbar-list" id="navbar-list">
             <li><a href="index.php">Home</a></li>
             <li><a href="services.php">Services</a></li>
             <li><a href="shop.php">Shop</a></li>
@@ -50,3 +55,13 @@ session_start(); // Start session BEFORE any output!
         </ul>
     </nav>
 </header>
+
+<script>
+function toggleMenu() {
+    const nav = document.getElementById("navbar-list");
+    // Toggle "active" class only if screen width ≤ 768px
+    if (window.innerWidth <= 768) {
+      nav.classList.toggle("active");
+    }
+  }
+</script>

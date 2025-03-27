@@ -16,8 +16,10 @@
     <main>
         <div class="contact-us-container">
             <div class="contact-container">
-                <div class="contact-image">
-                </div>
+                <!-- <div class="contact-image-wrap"> -->
+                    <div class="contact-image">
+                    </div>
+                <!-- </div>  -->
                 <div class="contact-form">
                     <h2>Contact Us</h2>
                     <form id="contactForm" action="./php/inquiry_action_page.php" method="post">

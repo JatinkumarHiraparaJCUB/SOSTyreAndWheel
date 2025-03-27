@@ -81,3 +81,8 @@ function validateLoginInfo(document){
     }
    return false;
 }
+
+
+
+// Navbar code
+

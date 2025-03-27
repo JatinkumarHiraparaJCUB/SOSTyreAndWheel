@@ -29,7 +29,7 @@
                     <span style="color: #ffc107;">Book Any Service – </span>Your free air pressure check is automatically included when you book any of our tyre services.<br />
                     Click <span style="color: #ffc107;">"Book an Appointment" </span>now and drive with confidence!<br />
                 </p>
-                <a href="#" class="book-appointment-button">Book Appointment Now</a>
+                <a href="book_appointment.php" class="book-appointment-button">Book Appointment Now</a>
             </div>
         </section>
     </main>

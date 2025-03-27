@@ -32,7 +32,7 @@
                     Click <span style="color: #ffc107;"></span>"Book an Appointment" </span>now and let us get your tyres sorted wherever you are!
                 </p>
 
-                <a href="#" class="book-appointment-button">Book Appointment Now</a>
+                <a href="book_appointment.php" class="book-appointment-button">Book Appointment Now</a>
             </div>
         </section>
     </main>

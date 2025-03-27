@@ -26,7 +26,7 @@
                     <span style="color: #ffc107;">Expert Service – </span>We replace worn-out valves to ensure your tyres maintain the right pressure for a safer, smoother ride.<br />
                     Click <span style="color: #ffc107;">"Book an Appointment" now and keep your tyres in top condition!<br />
                 </p>
-                <a href="#" class="book-appointment-button">Book Appointment Now</a>
+                <a href="book_appointment.php" class="book-appointment-button">Book Appointment Now</a>
             </div>
         </section>
     </main>

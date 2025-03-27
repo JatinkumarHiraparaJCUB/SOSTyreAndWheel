@@ -33,7 +33,7 @@
                     Our expert team ensures a perfect fit every time. <br />
                     Click <span style="color: #ffc107;">"Book an Appointment"</span> now and let’s get rolling! 🚗💨<br />
                 </p>
-                <a href="#" class="book-appointment-button">Book Appointment Now</a>
+                <a href="book_appointment.php" class="book-appointment-button">Book Appointment Now</a>
             </div>
         </section>
     </main>
