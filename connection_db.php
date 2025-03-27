@@ -1,8 +1,8 @@
 <?php
 // Define constants for connection info
-define("HOSTNAME", "127.0.0.1:3307");
-define("MYSQLUSER", "jd153574");
-define("MYSQLPASS", "Password574");
+define("HOSTNAME", "127.0.0.1:3306");
+define("MYSQLUSER", "jc968757");
+define("MYSQLPASS", "Password757");
 define("MYSQLDB", "sos_tyre");
 
 // Create connection

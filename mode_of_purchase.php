@@ -6,10 +6,11 @@ function sanitize_input($data)
 }
 
 // Check if the form was submitted correctly
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id'], $_POST['quantity'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id'], $_POST['quantity'], $_POST['price'])) {
     // Sanitize the POST data
     $product_id = sanitize_input($_POST['product_id']);
     $quantity = sanitize_input($_POST['quantity']);
+    $price = sanitize_input($_POST['price']);
 
 } else {
     echo "Data not found or Invalid Request"; //Show error message
@@ -35,11 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id'], $_POST['
             <div class="container">
                 <h1>MODE OF PURCHASE</h1>
 
-                <!-- You will not pass "sercvice_type" here, but instead from the submit on the main page -->
-                <form method="post" action="payment.php">
+                <form method="post" action="./php/add_to_cart.php">
                     <div class="purchase-options">
                         <input type="hidden" name="product_id" id="product_id" value=<?= $product_id ?>>
                         <input type="hidden" name="quantity" id="quantity" value=<?= $quantity ?>>
+                        <input type="hidden" name="price" id="price" value=<?= $price ?>>
                         <label>
                             <button type="submit" name="service_type" id="service_type" value="1" class="purchase-option">
                                 <img src="./image/store_fitting.png" alt="Store Fitting">

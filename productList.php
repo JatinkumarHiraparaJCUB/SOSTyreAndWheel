@@ -38,10 +38,15 @@ $result = $conn->query($sql);
 $models = array();
 $products = array();
 
+
 if ($result->num_rows > 0) {
     while ($data = $result->fetch_assoc()) {
-        $products[] = $data; // Add product to the array
-        $models[] = $data['model']; // Add model to the array
+        $products[] = $data;
+        if (isset($_SESSION['models'])) {
+            // $models = $_SESSION['models'];
+        } else {
+            $models[] = $data['model'];
+        }
     }
     $models = array_unique($models); // Remove duplicates
     sort($models); // Sort the array alphabetically
@@ -277,6 +282,11 @@ $conn->close();
             color: #0056b3;
         }
 
+        .form-container {
+            display: flex;
+            gap: 20px;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .product-grid-container {
@@ -293,63 +303,74 @@ $conn->close();
 </head>
 
 <body>
+
     <?php include "header.php"; ?>
     <main>
-        <form method="post" action="#">
-            <label for="width">Model:</label>
-            <select id="model" name="model">
-                <option value="">Select Model</option>
-                <?php
-                foreach ($models as $model) {
-                    echo "<option value='$model'>$model</option>";
-                }
-                ?>
-            </select>
-            <button type="submit">Search</button>
-        </form>
+        <div class="container">
+
+            <form method="post" action="#" class="form-container">
+                <label for="width">Model:</label>
+                <select id="model" name="model">
+                    <option value="">Select Model</option>
+                    <?php
+                    foreach ($models as $model) {
+                        echo "<option value='$model'>$model</option>";
+                    }
+                    ?>
+                </select>
+                <button type="submit">Search</button>
+            </form>
+
+        </div>
         <section class="container">
-
-
 
             <div class="product-grid-container">
 
                 <?php if (count($products) > 0): ?>
-                  <!-- <select id="model">
+                    <!-- <select id="model">
                 <option value="">Tyre Model</option>
                 <?php foreach ($models as $model) {
-                    echo '<option value="model1">' . htmlspecialchars($model) . '</option>';
-                }
+                        echo '<option value="model1">' . htmlspecialchars($model) . '</option>';
+                    }
                 ?>
             </select> -->
-                    <?php foreach ($products as $product): ?>
+                    <?php foreach ($products as $product):
+                        $availableStock = htmlspecialchars($product['available_stock_count']);
+                        $title = htmlspecialchars($product['title']);
+                        $model = htmlspecialchars($product['model']);
+                        $price = htmlspecialchars($product['price']);
+                        $tyreId = htmlspecialchars($product['tyre_id']);
 
-                       
+                    ?>
+
                         <div class="product-card">
-                                <img src="./image/tyre.png" alt="<?= htmlspecialchars($product['title']) ?>" class="product-image">
-                                <div class="product-info">
-                                    <h3 class='product-title'><?= htmlspecialchars($product['title']) ?></h3>
-                                    <p class="product-model"><?= htmlspecialchars($product['model']) ?></p>
-                                    <div class="price-box">
-                                        Pickup Price <br>
-                                        $<?= htmlspecialchars(number_format($product['price'], 2)) ?>
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </div>
-                                 <!-- Hidden inputs and a Submit Button (Styled like a Link) -->
+                            <img src="./image/tyre.png" alt="<?= $title ?>" class="product-image">
+                            <div class="product-info">
+                                <h3 class='product-title'><?= $title ?></h3>
+                                <p class="product-model"><?= $model ?></p>
+                                <div class="price-box">
+                                    Pickup Price <br>
+                                    $<?= htmlspecialchars(number_format($product['price'], 2)) ?>
+                                    <i class="fa fa-shopping-cart"></i>
+                                </div>
+                                <!-- Hidden inputs and a Submit Button (Styled like a Link) -->
 
                                 <form method="post" action="mode_of_purchase.php">
-                                 
-                                    <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['tyre_id']) ?>">
-                                       <label for="quantity">Select Quantity:</label>
-                                        <select name="quantity" id="quantity" class="form-select">
-                                            <?php for ($i = 1; $i <= 10; $i++) {
-                                                echo "<option value='$i'>$i</option>";
-                                            } ?>
-                                        </select>
-                                      <button type="submit" class="buy-now">Buy Now</button>
+
+                                    <input type="hidden" name="product_id" value="<?= $tyreId ?>">
+                                    <input type="hidden" name="price" value="<?= $price ?>">
+                                    <label style="color: black;" for="quantity">Select Quantity : </label>
+                                    <select name="quantity" id="quantity" class="form-select">
+                                        <?php for ($i = 1; $i <= $availableStock; $i++) {
+                                            echo "<option value='$i'>$i</option>";
+                                        } ?>
+                                    </select>
+                                    <span class="product-model"> / <?= $availableStock ?> Available</span>
+                                    <button type="submit" class="buy-now">Buy Now</button>
                                 </form>
 
-                                </div>
                             </div>
+                        </div>
 
                     <?php endforeach; ?>
 
@@ -359,6 +380,7 @@ $conn->close();
             </div>
 
         </section>
+
     </main>
 
     <?php include "footer.php"; ?>

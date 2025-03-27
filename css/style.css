@@ -8,10 +8,16 @@ body {
   background-color: #001f3f;
   color: #fff;
   line-height: 1.6;
-  background: url("../image/bgLayer2.png") no-repeat center center/cover;
-  background-color: rgba(0, 31, 63, 0.4);
+  background: url("../image/bgLayer2.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
   background-size: cover;
-  /* height: 100vh; */
+  background-color: rgba(0, 31, 63, 0.4);
+  height: 100vh;
+}
+main{
+  height: 100%;
 }
 .container {
   max-width: 1400px;
@@ -73,7 +79,12 @@ body {
 }
 
 /* HERO  */
-
+.hero{
+  height: 100%;
+}
+.hero .container {
+  height: 100%;
+}
 .hero-title {
   font-size: 3em;
   margin-bottom: 20px;
@@ -314,6 +325,7 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+  height: 10%;
 }
 /* Australia Map and Logo (Right Side) */
 .map-logo {
@@ -325,35 +337,6 @@ footer {
   max-width: 100%;
   height: auto;
   display: block;
-}
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* height: 90vh; */
-  gap: 50px;
-}
-.login-box {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-.login-box h1 {
-  margin-bottom: 20px;
-}
-.login-box input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-.login-box .options {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
 }
 button {
   width: 100%;
@@ -450,7 +433,6 @@ button {
   width: 50%;
   padding: 20px;
   box-sizing: border-box;
-  background-color: #333;
 }
 .tyre-modal .tyre-info img {
   max-width: 100%;
@@ -878,6 +860,7 @@ button {
   gap: 200px;
   max-width: 1000px;
   width: 100%;
+  height: 100%;
   margin: 0 auto;
 }
 .login-box {
@@ -901,6 +884,7 @@ button {
 }
 .login-box .options {
   display: flex;
+  color: black;
   justify-content: space-between;
   font-size: 14px;
   margin-top: 10px;
@@ -930,6 +914,7 @@ button {
 .login-box p {
   margin-top: 20px;
   font-size: 14px;
+  color: black;
 }
 .login-box p a {
   color: #001f3f;
@@ -959,6 +944,11 @@ button {
   border-radius: 0.25rem;
   text-align: center;
 }
+
+.login-container .options input{
+  width: auto;
+}
+
 
 /* SERVICES PAGE */
 .rectangular-service-card {
@@ -1173,11 +1163,15 @@ button {
   /* CONTACT US  */
 
   .contact-us-container {
-    position: absolute;
+    /* position: absolute;
     width: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    height: 100%; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100%;
   }
   .contact-container {

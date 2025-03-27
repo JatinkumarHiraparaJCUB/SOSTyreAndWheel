@@ -43,12 +43,12 @@
                         <p>VALVE CHANGE</p>
                     </div>
                 </a>
-                <a href="mobile_fitting_service_page.php">
+                <!-- <a href="mobile_fitting_service_page.php">
                     <div class="purchase-option">
                         <img src="./image/mobile_fitting.png" alt="Mobile Fitting">
                         <p>MOBILE FITTING</p>
                     </div>
-                </a>
+                </a> -->
             </div>
 
         </div>

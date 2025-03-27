@@ -99,48 +99,7 @@ $conn->close();
             /* To prevent scrollbar in main section */
         }
 
-        /* Header and Footer - Assuming from previous files */
-        .navbar {
-            background-color: black;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar .logo {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .navbar nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-
-        .navbar nav ul li {
-            margin-left: 20px;
-        }
-
-        .navbar nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        footer {
-            background-color: black;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-
+        
         /* Main Content Styling */
         main {
             flex: 1;
@@ -406,9 +365,7 @@ $conn->close();
 
     </main>
 
-    <footer>
-        <p>© 2024 SOS Tyres and Wheels. All rights reserved.</p>
-    </footer>
+    <?php include 'footer.php'; ?>
 
 </body>
 

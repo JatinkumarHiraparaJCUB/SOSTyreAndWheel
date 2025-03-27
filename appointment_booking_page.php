@@ -1,36 +1,4 @@
-<?php
 
-// Check if the form was submitted correctly
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $orderId = isset($_POST['orderid']) ? $_POST['orderid'] : '';
-    $finalAmount = isset($_POST['final_amount']) ? $_POST['final_amount'] : '';
-    $finalAmount = floatval($finalAmount);
-
-    include 'connection_db.php';
-
-    $stmt = $conn->prepare("UPDATE orders SET total_cost = ? WHERE id = ?");
-    $stmt->bind_param("ss", $totalPrice, $orderId);
-
-    if ($stmt->execute()) {
-        $insertedId = $conn->insert_id;
-        $_SESSION['order_id'] = $insertedId;
-    } else {
-        echo "<script>
-                    alert('Error: " . addslashes($stmt->error) . "');
-                    window.history.back();
-                  </script>";
-    }
-    $stmt->close();
-} else {
-    //Handle what happened if session or POST wasn't working.
-    echo "No product selected!. Please return to homepage, and repeat operation";
-    exit();
-}
-
-// Close the database connection
-$conn->close();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -192,7 +160,7 @@ $conn->close();
                 </div>
             </div>
 
-            <div class="schedule-section">
+            <!-- <div class="schedule-section">
                 <h2>Price Details</h2>
                 <div class="price-details">
                     <div class="price-item">
@@ -226,10 +194,10 @@ $conn->close();
                         <span class="value total-value">$ <?= $finalAmount ?></span>
                     </div>
 
-                    <button class="confirm-button" onclick="window.location.href='cart.php'">Add to Cart</button>
+                    <button class="confirm-button" onclick="window.location.href='payment.php'">Add to Cart</button>
                 </div>
-            </div>
-
+            </div> -->
+            <button class="confirm-button" onclick="window.location.href='payment_done_page.php'">Confirm Booking</button>
         </div>
     </main>
     <script>

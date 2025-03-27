@@ -1,6 +1,6 @@
 <?php
 
-include 'connection_db.php';
+include '../connection_db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $firstName = isset($_POST['firstName']) ? $_POST['firstName'] : '';
