@@ -10,6 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gst = 0;
     $gst += $finalAmount * 0.10;
 
+    $totalAmount = $finalAmount + $gst;
+
 
     // echo '<h1>'.$orderId.'</h1>';
     // echo '<h1>'.$finalAmount.'</h1>';
@@ -144,12 +146,12 @@ $conn->close();
 
                     <div class="total-line">
                         <span class="label total-label">Total :</span>
-                        <span class="value total-value">$ <?= $finalAmount + $gst ?></span>
+                        <span class="value total-value">$ <?= $totalAmount ?></span>
                     </div>
 
                 </div>
-                <button class="confirm-button" onclick="window.location.href='payment_done_page.php'">Payment</button>
-                <div id="paypal-button-container"></div>
+                <!-- <button class="confirm-button" onclick="window.location.href='payment_done_page.php'">Payment</button> -->
+                <div id="paypal-button-container" class="confirm-button"></div>
 
             </div>
 
@@ -160,14 +162,14 @@ $conn->close();
 
 </html>
 
-<script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=AUD"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AaNfdQ76V-MkOK9w31GvgGjVO7lOS4Jg217x9vDNjt_YI9wySCrhfxlD2eJehJN1_ZwhiifEAIUN_Ta0&currency=AUD"></script>
 <script>
     paypal.Buttons({
         createOrder: function(data, actions) {
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: '<?php echo $finalAmount; ?>' // Use your dynamic PHP variable
+                        value: '<?php echo $totalAmount; ?>' // Use your dynamic PHP variable
                     }
                 }]
             });
